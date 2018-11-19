@@ -58,7 +58,6 @@ namespace WebApiTest
             });
 
             app.UseStaticFiles();
-            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();
         }

@@ -20,7 +20,7 @@ namespace WebApiTest.GpsMethods
                 routeInfo.Imei = lastLocation.imei;
                 routeInfo.GpsName = Tracker.name;
                 routeInfo.GpsStatus = Tracker.status;
-                routeInfo.Battery = lastLocation.battery ?? "No available info";
+                routeInfo.Battery = Tracker.battery ?? "No available info";
                 routeInfo.LastDate = lastLocation.date.Value.ToString();
                 routeInfo.LastLatitude = lastLocation.latitude.ToString().Replace(",", ".");
                 routeInfo.LastLongitude = lastLocation.longitude.ToString().Replace(",", ".");

@@ -14,6 +14,7 @@ namespace WebApiTest.Models
         public string imei { get; set; }
         public string name { get; set; }
         public string status { get; set; }
+        public string battery { get; set; }
 
         public virtual List<Locations> Locations { get; set; } = new List<Locations>();
     }

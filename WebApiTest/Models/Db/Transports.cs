@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApiTest.Models
 {
@@ -23,6 +20,10 @@ namespace WebApiTest.Models
         public string Address { get; set; }
         [Column("proj_no")]
         public string ProjectNo { get; set; }
+        [Column("addr_latitude")]
+        public string AddressLatitude { get; set; }
+        [Column("addr_longitude")]
+        public string AddressLongitude { get; set; }
 
         [ForeignKey("imei")]
         public virtual Trackers Tracker { get; set; }

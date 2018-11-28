@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApiTest.Models;
 using WebApiTest.GpsMethods;
 
@@ -15,15 +12,13 @@ namespace WebApiTest.Controllers
         [HttpGet]
         public List<TransportsInfo> Get()
         {
-            List<TransportsInfo> transportInfos = new List<TransportsInfo>();
+            return TransportsService.GetTransportsInfoList();
+        }
 
-            using(var context = new GPSContext())
-            {
-                var transports = context.Transports.Take(1000).ToList();
-                transportInfos = TransportsService.GetTransportsInfoList(transports);
-            }
-
-            return transportInfos;
+        [HttpGet("{orderNo}")]
+        public TransportsInfo Get(int orderNo)
+        {
+            return TransportsService.GetTransportInfo(orderNo); ;
         }
     }
 }

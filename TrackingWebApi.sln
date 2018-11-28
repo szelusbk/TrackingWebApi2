@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsWebApi", "WebApiTest\GpsWebApi.csproj", "{7695A205-B91B-451E-88D0-501C77F7DE15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingWebApi", "WebApiTest\TrackingWebApi.csproj", "{7695A205-B91B-451E-88D0-501C77F7DE15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsWebApi.Tests", "WebApi.Tests\GpsWebApi.Tests.csproj", "{5CBD7EBB-CF42-4140-894D-E8A8B6352A8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingWebApi.Tests", "WebApi.Tests\TrackingWebApi.Tests.csproj", "{5CBD7EBB-CF42-4140-894D-E8A8B6352A8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

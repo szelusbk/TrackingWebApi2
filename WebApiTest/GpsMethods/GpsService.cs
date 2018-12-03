@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrackingWebApi.GpsMethods;
 using WebApiTest.APIs;
 using WebApiTest.Models;
 
@@ -20,16 +21,16 @@ namespace WebApiTest.GpsMethods
                 routeInfo.Imei = lastLocation.Imei;
                 routeInfo.GpsName = Tracker.Name;
                 routeInfo.GpsStatus = Tracker.Status;
-                routeInfo.Battery = Tracker.Battery ?? "No available info";
+                routeInfo.Battery = lastLocation.Battery ?? "No available info";
                 routeInfo.LastDate = lastLocation.Date.Value.ToString();
                 routeInfo.LastLatitude = lastLocation.Latitude.ToString().Replace(",", ".");
                 routeInfo.LastLongitude = lastLocation.Longitude.ToString().Replace(",", ".");
 
-                TimeSpan diff = lastLocation.Date.Value - firstLocation.Date.Value;
+                TimeSpan diff = GpsTimeHelper.GetElapsedTime(locations);
                 routeInfo.ElapsedTime = diff.Days.ToString() + " days, " + diff.Hours + " hours, " + diff.Minutes + " minutes";
 
-                DistanceMatrix distanceMatrix = new DistanceMatrix(firstLocation.Latitude.ToString().Replace(",", ".") + "," + firstLocation.Longitude.ToString().Replace(",", "."), routeInfo.LastLatitude + "," + routeInfo.LastLongitude);
-                routeInfo.Distance = await distanceMatrix.CalculateDistanceAsync();
+                routeInfo.GoogleDistance = await DistanceMatrix.CalculateDistanceAsync(firstLocation.Latitude.ToString().Replace(",", ".") + "," + firstLocation.Longitude.ToString().Replace(",", "."), routeInfo.LastLatitude + "," + routeInfo.LastLongitude);
+                routeInfo.Distance = GpsDistanceHelper.CalculateDistance(locations).ToString();
 
                 foreach (var loc in locations)
                 {
@@ -74,16 +75,16 @@ namespace WebApiTest.GpsMethods
                     if (dateFrom != dateTo)
                         loc = loc.Where(x => x.Date <= dateTo).OrderByDescending(x => x.Date);
 
-                        if (dateFrom.Hour == 0 && dateFrom.Minute == 0 && dateTo.Hour == 0 && dateTo.Minute == 0)
-                            locations = loc.ToList();
-                        else
-                            locations = loc.Where(x => x.Date <= dateTo && x.Date >= dateFrom).OrderByDescending(x => x.Date).ToList();
+                    if (dateFrom.Hour == 0 && dateFrom.Minute == 0 && dateTo.Hour == 0 && dateTo.Minute == 0)
+                        locations = loc.ToList();
+                    else
+                        locations = loc.Where(x => x.Date <= dateTo && x.Date >= dateFrom).OrderByDescending(x => x.Date).ToList();
 
-                        if (locations.Count > 0)
-                        {
-                            RouteInfo routeInfo = await GetRouteInfo(locations, tracker);
-                            routeInfoList.Add(routeInfo);
-                        }
+                    if (locations.Count > 0)
+                    {
+                        RouteInfo routeInfo = await GetRouteInfo(locations, tracker);
+                        routeInfoList.Add(routeInfo);
+                    }
                 }
             }
             return routeInfoList;

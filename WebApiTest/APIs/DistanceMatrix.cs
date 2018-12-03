@@ -4,24 +4,15 @@ using System.Threading.Tasks;
 
 namespace WebApiTest.APIs
 {
-    public class DistanceMatrix
+    public static class DistanceMatrix
     {
-        private readonly string apiKey = "key";
-        private readonly string url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=";
+        private static readonly string apiKey = "key";
+        private static readonly string url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=";
         private static readonly HttpClient client = new HttpClient();
 
-        public string Origins { get; private set; }
-        public string Destinations { get; private set; }
-
-        public DistanceMatrix(string origins, string destinations)
+        public static async Task<string> CalculateDistanceAsync(string origins, string destinations)
         {
-            Origins = origins;
-            Destinations = destinations;
-        }
-
-        public async Task<string> CalculateDistanceAsync()
-        {
-            var responseString = await client.GetStringAsync(url + Origins + "&destinations=" + Destinations + "&key=" + apiKey);
+            var responseString = await client.GetStringAsync(url + origins + "&destinations=" + destinations + "&key=" + apiKey);
             JsonValue json = JsonValue.Parse(responseString);
 
             string status = json["status"];

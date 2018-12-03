@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Express 15 for Windows Desktop
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingWebApi", "WebApiTest\TrackingWebApi.csproj", "{7695A205-B91B-451E-88D0-501C77F7DE15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackingWebApi.Tests", "WebApi.Tests\TrackingWebApi.Tests.csproj", "{5CBD7EBB-CF42-4140-894D-E8A8B6352A8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackingWebApi.Tests", "WebApi.Tests\TrackingWebApi.Tests.csproj", "{5CBD7EBB-CF42-4140-894D-E8A8B6352A8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

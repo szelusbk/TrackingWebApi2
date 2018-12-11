@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 
-namespace WebApiTest.Models
+namespace TrackingWebApi.Models
 {
-    public class GPSContext : DbContext
+    public class GpsContext : DbContext, IGpsContext
     {
-        public GPSContext() : base() { }
+        public GpsContext() : base() {}
+        public GpsContext(DbContextOptions<GpsContext> options) : base(options) {}
 
         public DbSet<Locations> Locations { get; set; }
         public DbSet<Trackers> Trackers { get; set; }

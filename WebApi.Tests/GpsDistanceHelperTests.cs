@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
-using TrackingWebApi.GpsMethods;
+using TrackingWebApi.Services;
 using TrackingWebApi.Tests.Stubs;
-using WebApiTest.Models;
+using TrackingWebApi.Models;
 
 namespace TrackingWebApi.Tests
 {
@@ -15,12 +13,12 @@ namespace TrackingWebApi.Tests
         public void CalculateDistance_GetDistanceInKmFromLocations_ReturnsCorrectDistance()
         {
             //Arrange
-            LocationsList list = new LocationsList();
-            List<Locations> locations = list.Locations;
+            List<Locations> locations = LocationsListStub.GetLocationsList();
+            GpsDistanceHelper gpsDistanceHelper = new GpsDistanceHelper();
             double expectedDistance = 2.07;
 
             //Act
-            double distance = GpsDistanceHelper.CalculateDistance(locations);
+            double distance = gpsDistanceHelper.CalculateDistance(locations);
 
             //Assert
             Assert.AreEqual(expectedDistance, distance);

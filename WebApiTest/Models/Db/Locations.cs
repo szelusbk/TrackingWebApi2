@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace WebApiTest.Models
+namespace TrackingWebApi.Models
 {
     [Table("Locations")]
     public class Locations

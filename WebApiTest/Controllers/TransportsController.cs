@@ -1,24 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using WebApiTest.Models;
-using WebApiTest.GpsMethods;
+using TrackingWebApi.Models;
+using TrackingWebApi.Services.Interfaces;
 
-namespace WebApiTest.Controllers
+namespace TrackingWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class TransportsController
     {
+        private readonly ITransportsService transportsService;
+
+        public TransportsController(ITransportsService transportsService)
+        {
+            this.transportsService = transportsService;
+        }
+
         [HttpGet]
         public List<TransportsInfo> Get()
         {
-            return TransportsService.GetTransportsInfoList();
+            return transportsService.GetTransportsInfoList();
         }
 
         [HttpGet("{orderNo}")]
         public TransportsInfo Get(int orderNo)
         {
-            return TransportsService.GetTransportInfo(orderNo); ;
+            return transportsService.GetTransportInfo(orderNo);
         }
     }
 }

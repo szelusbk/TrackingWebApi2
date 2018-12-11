@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using WebApiTest.APIs;
-using WebApiTest.Models;
+using TrackingWebApi.Models;
 using GeoCoordinatePortable;
+using TrackingWebApi.Services.Interfaces;
 
-namespace TrackingWebApi.GpsMethods
+namespace TrackingWebApi.Services
 {
-    public static class GpsTimeHelper
+    public class GpsTimeHelper: IGpsTimeHelper
     {
-        public static TimeSpan GetElapsedTime(List<Locations> locations)
+        public TimeSpan GetElapsedTime(List<Locations> locations)
         {
             DateTime startDate = GetStartDate(locations);
             DateTime endDate = GetEndDate(locations);
@@ -19,21 +18,21 @@ namespace TrackingWebApi.GpsMethods
             return elapsedTime;
         }
 
-        private static DateTime GetStartDate(List<Locations> locations)
+        private DateTime GetStartDate(List<Locations> locations)
         {
             locations = locations.OrderBy(x => x.Date).ToList();
             DateTime startDate = GetFirstDate(locations);
             return startDate;
         }
 
-        private static DateTime GetEndDate(List<Locations> locations)
+        private DateTime GetEndDate(List<Locations> locations)
         {
             locations = locations.OrderByDescending(x => x.Date).ToList();
             DateTime endDate = GetFirstDate(locations);
             return endDate;
         }
 
-        private static DateTime GetFirstDate(List<Locations> locations)
+        private DateTime GetFirstDate(List<Locations> locations)
         {
             DateTime date = new DateTime();
             Locations previousLocation = new Locations();

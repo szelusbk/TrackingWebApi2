@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 
 
-namespace WebApiTest
+namespace TrackingWebApi
 {
     public class Program
     {

@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TrackingWebApi.APIs;
+using TrackingWebApi.Models;
+using TrackingWebApi.Services;
+using TrackingWebApi.Services.Interfaces;
 
-namespace WebApiTest
+namespace TrackingWebApi
 {
     public class Startup
     {
@@ -26,6 +30,14 @@ namespace WebApiTest
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<ITransportsService, TransportsService>();
+            services.AddSingleton<ILoginService, LoginService>();
+            services.AddSingleton<IGpsService, GpsService>();
+            services.AddSingleton<IGpsDistanceHelper, GpsDistanceHelper>();
+            services.AddSingleton<IGpsTimeHelper, GpsTimeHelper>();
+            services.AddSingleton<IDistanceMatrix, DistanceMatrix>();
+            services.AddTransient<IGpsContext, GpsContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

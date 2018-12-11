@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GeoCoordinatePortable;
-using WebApiTest.Models;
+using TrackingWebApi.Services.Interfaces;
+using TrackingWebApi.Models;
 
-namespace TrackingWebApi.GpsMethods
+namespace TrackingWebApi.Services
 {
-    public static class GpsDistanceHelper
+    public class GpsDistanceHelper : IGpsDistanceHelper
     {
-        public static double CalculateDistance(List<Locations> locations)
+        public double CalculateDistance(List<Locations> locations)
         {
             GeoCoordinate previousCoord = null;
             GeoCoordinate currentCoord = null;

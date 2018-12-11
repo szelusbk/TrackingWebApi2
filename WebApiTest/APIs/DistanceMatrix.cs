@@ -2,15 +2,15 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace WebApiTest.APIs
+namespace TrackingWebApi.APIs
 {
-    public static class DistanceMatrix
+    public class DistanceMatrix : IDistanceMatrix
     {
-        private static readonly string apiKey = "key";
-        private static readonly string url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=";
-        private static readonly HttpClient client = new HttpClient();
+        private readonly string apiKey = "key";
+        private readonly string url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=";
+        private readonly HttpClient client = new HttpClient();
 
-        public static async Task<string> CalculateDistanceAsync(string origins, string destinations)
+        public async Task<string> CalculateDistanceAsync(string origins, string destinations)
         {
             var responseString = await client.GetStringAsync(url + origins + "&destinations=" + destinations + "&key=" + apiKey);
             JsonValue json = JsonValue.Parse(responseString);

@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using WebApiTest.Models;
+using TrackingWebApi.Models;
 using TrackingWebApi.Tests.Stubs;
-using TrackingWebApi.GpsMethods;
+using TrackingWebApi.Services;
 
 namespace TrackingWebApi.Tests
 {
     [TestFixture]
     public class GpsTimeHelperTests
     {
-
         [Test]
         public void GetElapsedTime_DetermineElapsedTimeBasedOnLocations_ReturnsCorrectDateTime()
         {
             //Arrange
-            LocationsList list = new LocationsList();
-            List<Locations> locations = list.Locations;
+            List<Locations> locations = LocationsListStub.GetLocationsList();
+            GpsTimeHelper gpsTimeHelper = new GpsTimeHelper();
             TimeSpan expectedTime = new TimeSpan(0,13,39);
 
             //Act
-            TimeSpan elapsedTime = GpsTimeHelper.GetElapsedTime(locations);
+            TimeSpan elapsedTime = gpsTimeHelper.GetElapsedTime(locations);
 
             //Assert
             Assert.AreEqual(expectedTime, elapsedTime);

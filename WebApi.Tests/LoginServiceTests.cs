@@ -1,24 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TrackingWebApi.Models;
+using TrackingWebApi.Services;
+using TrackingWebApi.Tests.Stubs;
 
 namespace TrackingWebApi.Tests
 {
     [TestFixture]
     public class LoginServiceTests
     {
+        private LoginService GetLoginService()
+        {
+            IGpsContext gpsContext = new GpsContextStub().GetContext();
+            LoginService loginService = new LoginService(gpsContext);
+            return loginService;
+        }
+
+        [Test]
         public void GetHash_PassLoginString_ReturnsCorrectHash()
         {
-            //For later time
-            //use Entity Framework Effort - https://entityframework-effort.net/?z=codeplex (not supported EF Core)
+            //Arrange
+            string login = "login";
+            LoginService loginService = GetLoginService();
 
-            //Or in memory database of EF Core https://stormpath.com/blog/tutorial-entity-framework-core-in-memory-database-asp-net-core
-            //var options = new DbContextOptionsBuilder<Context>()
-            //.UseInMemoryDatabase(Object String)
-            //.Options;
+            //Act
+            string hashedPass = loginService.GetHash(login);
 
-            //Additional Make DbContext Injection via Property and configure Dependency Injection Container
+            //Assert
+            StringAssert.IsMatch("Hz123Wz", hashedPass);
         }
     }
 }

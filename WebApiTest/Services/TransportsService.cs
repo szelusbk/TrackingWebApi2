@@ -1,12 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using WebApiTest.Models;
+using TrackingWebApi.Models;
+using TrackingWebApi.Services.Interfaces;
 
-namespace WebApiTest.GpsMethods
+namespace TrackingWebApi.Services
 {
-    public static class TransportsService
+    public class TransportsService : ITransportsService
     {
-        public static TransportsInfo GetTransportInfo(Transports transport)
+        private readonly IGpsContext context;
+
+        public TransportsService(IGpsContext context)
+        {
+            this.context = context;
+        }
+
+        public TransportsInfo GetTransportInfo(Transports transport)
         {
             TransportsInfo transportInfo = new TransportsInfo()
             {
@@ -26,7 +34,7 @@ namespace WebApiTest.GpsMethods
             return transportInfo;
         }
 
-        public static List<TransportsInfo> GetTransportsInfoList(List<Transports> transports)
+        public List<TransportsInfo> GetTransportsInfoList(List<Transports> transports)
         {
             List<TransportsInfo> transportsInfoList = new List<TransportsInfo>();
 
@@ -39,30 +47,24 @@ namespace WebApiTest.GpsMethods
             return transportsInfoList;
         }
 
-        public static List<TransportsInfo> GetTransportsInfoList()
+        public List<TransportsInfo> GetTransportsInfoList()
         {
             List<TransportsInfo> transportsInfoList = new List<TransportsInfo>();
 
-            using (var context = new GPSContext())
-            {
-                var transports = context.Transports.OrderByDescending(x => x.DateFrom).Take(1000).ToList();
-                transportsInfoList = GetTransportsInfoList(transports);
-            }
+            var transports = context.Transports.OrderByDescending(x => x.DateFrom).Take(1000).ToList();
+            transportsInfoList = GetTransportsInfoList(transports);
 
             return transportsInfoList;
         }
 
-        public static TransportsInfo GetTransportInfo(int orderNo)
+        public TransportsInfo GetTransportInfo(int orderNo)
         {
             TransportsInfo transportInfo = new TransportsInfo();
 
-            using (var context = new GPSContext())
+            var transport = context.Transports.Where(x => x.Id == orderNo).FirstOrDefault();
+            if (transport != null)
             {
-                var transport = context.Transports.Where(x => x.Id == orderNo).FirstOrDefault();
-                if (transport != null)
-                {
-                    transportInfo = GetTransportInfo(transport);
-                }
+                transportInfo = GetTransportInfo(transport);
             }
 
             return transportInfo;

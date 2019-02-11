@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TrackingWebApi.Models.Db;
 
 namespace TrackingWebApi.Models
 {
@@ -12,5 +9,6 @@ namespace TrackingWebApi.Models
         DbSet<Trackers> Trackers { get; set; }
         DbSet<Transports> Transports { get; set; }
         DbSet<Users> Users { get; set; }
+        DbSet<Orders> Orders { get; set; }
     }
 }

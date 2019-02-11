@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using TrackingWebApi.Models.Db;
 
 namespace TrackingWebApi.Models
 {
@@ -12,6 +12,7 @@ namespace TrackingWebApi.Models
         public DbSet<Trackers> Trackers { get; set; }
         public DbSet<Transports> Transports { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Orders> Orders { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

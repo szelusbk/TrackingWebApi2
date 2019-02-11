@@ -10,8 +10,5 @@ namespace TrackingWebApi.Services.Interfaces
         Task<RouteInfo> GetRouteInfo(List<Locations> locations, Trackers Tracker);
         Task<RouteInfo> GetRouteInfo(DateTime dateFrom, DateTime dateTo, string imei);
         Task<List<RouteInfo>> GetRouteInfoList(DateTime dateFrom, DateTime dateTo);
-
-
-
     }
 }

@@ -38,6 +38,7 @@ namespace TrackingWebApi
             services.AddSingleton<IGpsTimeHelper, GpsTimeHelper>();
             services.AddSingleton<IDistanceMatrix, DistanceMatrix>();
             services.AddTransient<IGpsContext, GpsContext>();
+            services.AddTransient<IOrdersService, OrdersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

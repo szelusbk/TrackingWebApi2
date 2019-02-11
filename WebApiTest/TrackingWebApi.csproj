@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <FileUpgradeFlags>40</FileUpgradeFlags>
-    <UpgradeBackupLocation>C:\Users\LS\Documents\Visual Studio 2017\Projects\WebApiTest\Backup1\</UpgradeBackupLocation>
+    <UpgradeBackupLocation>C:\Users\LS\Documents\Visual Studio 2017\Projects\WebApiTest\Backup2\WebApiTest\</UpgradeBackupLocation>
     <OldToolsVersion>15.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using TrackingWebApi.Models;
+using TrackingWebApi.Models.Db;
 
 namespace TrackingWebApi.Tests.Stubs
 {
@@ -28,8 +29,12 @@ namespace TrackingWebApi.Tests.Stubs
                 List<Transports> transports = TransportListStub.GetTransportList();
                 gpsContext.Transports.AddRange(transports);
 
+                List<Orders> orders = OrdersListStub.GetOrdersList();
+                gpsContext.Orders.AddRange(orders);
+
                 Users user = UserStub.GetUser();
                 gpsContext.Users.Add(user);
+
 
                 gpsContext.SaveChanges();
                 context = gpsContext;

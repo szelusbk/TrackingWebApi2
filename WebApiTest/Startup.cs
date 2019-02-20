@@ -31,14 +31,14 @@ namespace TrackingWebApi
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSingleton<ITransportsService, TransportsService>();
-            services.AddSingleton<ILoginService, LoginService>();
-            services.AddSingleton<IGpsService, GpsService>();
-            services.AddSingleton<IGpsDistanceHelper, GpsDistanceHelper>();
-            services.AddSingleton<IGpsTimeHelper, GpsTimeHelper>();
-            services.AddSingleton<IDistanceMatrix, DistanceMatrix>();
-            services.AddTransient<IGpsContext, GpsContext>();
+            services.AddTransient<ITransportsService, TransportsService>();
+            services.AddTransient<ILoginService, LoginService>();
+            services.AddTransient<IGpsService, GpsService>();
+            services.AddTransient<IGpsDistanceHelper, GpsDistanceHelper>();
+            services.AddTransient<IGpsTimeHelper, GpsTimeHelper>();
+            services.AddTransient<IDistanceMatrix, DistanceMatrix>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddScoped<IGpsContext, GpsContext>(); //per web request
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
